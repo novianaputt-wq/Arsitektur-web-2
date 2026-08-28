@@ -898,39 +898,35 @@ Project2/
 
 ---
 
-# 📸 Screenshot
+## 📸 Screenshot
 
-## Customer Page
+### 🏠 Dashboard
 
-![Customer Page](./screenshots/customer.png)
+![Dashboard](./Screenshot/Screenshot%202026-08-28%20115431.png)
 
-## Seller Dashboard
+### 📊 Business Monitoring
 
-![Seller Dashboard](./screenshots/dashboard.png)
+![Business Monitoring](./Screenshot/Screenshot%202026-08-28%20115448.png)
 
-## Business Monitoring
+### 📦 Product Management
 
-![Business Monitoring](./screenshots/business-monitoring.png)
+![Product Management](./Screenshot/Screenshot%202026-08-28%20115505.png)
 
-## Product Management
+### 🛒 Order Management
 
-![Product Management](./screenshots/product-management.png)
+![Order Management](./Screenshot/Screenshot%202026-08-28%20115522.png)
 
-## Order Management
+### 📋 Activity Logs
 
-![Order Management](./screenshots/order-management.png)
+![Activity Logs](./Screenshot/Screenshot%202026-08-28%20115542.png)
 
-## Activity Logs
+### 🖥️ Server Monitoring
 
-![Activity Logs](./screenshots/activity-logs.png)
+![Server Monitoring](./Screenshot/Screenshot%202026-08-28%20115559.png)
 
-## Server Monitoring
+### ⚙️ Settings
 
-![Server Monitoring](./screenshots/server-monitoring.png)
-
-## Settings
-
-![Settings](./screenshots/settings.png)
+![Settings](./Screenshot/Screenshot%202026-08-28%20115613.png)
 
 > Screenshot digunakan sebagai dokumentasi tampilan aplikasi yang dijalankan pada Web Server Debian.
 
