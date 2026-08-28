@@ -462,7 +462,9 @@ Hal ini membuat proses pengelolaan pesanan menjadi lebih terstruktur.
 
 Salah satu bagian utama project adalah **Server Monitoring**.
 
-Fitur ini dibuat sebagai bentuk antisipasi apabila resource server mengalami penggunaan yang tinggi.
+Fitur ini dibuat menggunakan Node.js os module untuk mengambil data langsung dari server Debian.
+
+Data tersebut diproses melalui Express API /api/server/health lalu ditampilkan di dashboard Server Monitoring. sebagai bentuk antisipasi apabila resource server mengalami penggunaan yang tinggi.
 
 Monitoring mencakup:
 
@@ -937,7 +939,7 @@ Project2/
 ## 1. Clone Repository
 
 ```bash
-git clone <URL-REPOSITORY>
+git clone <https://github.com/novianaputt-wq/Arsitektur-web-2>
 cd Project2
 ```
 
