@@ -1,4 +1,4 @@
-# Arsitektur-web-2
+# Arsitektur-web-2 | Design Project2
 ## Arsitektur Sistem
 ```text
                     ┌──────────────────────────┐
