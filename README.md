@@ -1295,7 +1295,7 @@ Dokumentasi lengkap mengenai project, proses pengembangan, implementasi Web Serv
 **Edusoft Portfolio**
 
 ```text
-<TEMPEL-LINK-PORTFOLIO-DI-SINI>
+(https://portfolio.edusoftcenter.com/contributors/noviana-putri-yuliani)
 ```
 
 ---
