@@ -1,10 +1,11 @@
+````markdown
 # 🥟 Dimsum Delight Web Server
 
 **Dimsum Delight Web Server** merupakan aplikasi pemesanan dan pengelolaan produk dimsum berbasis web yang dikembangkan menggunakan **Node.js, Express.js, MariaDB, HTML, CSS, dan JavaScript** serta dijalankan pada **server Debian 13**.
 
-Project ini tidak hanya berfokus pada pembuatan aplikasi pemesanan, tetapi juga menerapkan konsep **Web Server, deployment aplikasi, service management, database management, REST API, activity logging, resource monitoring, dan antisipasi penggunaan resource server berlebih**.
+Project ini tidak hanya berfokus pada pembuatan aplikasi, tetapi juga menerapkan konsep **jaringan client-server, Web Server, deployment, administrasi server Linux, service management, database server, komunikasi melalui jaringan lokal, activity logging, resource monitoring, dan antisipasi penggunaan resource server berlebih**.
 
-Pada sisi server, aplikasi dijalankan sebagai service menggunakan **systemd**, sehingga aplikasi dapat dikelola seperti service server pada umumnya. Project juga menyediakan **Server Monitoring** untuk memantau penggunaan CPU, RAM, uptime, serta status server melalui dashboard penjual.
+Pada implementasinya, Debian 13 digunakan sebagai server yang menyediakan layanan aplikasi kepada client melalui jaringan. Aplikasi dijalankan menggunakan **systemd** sehingga dapat dikelola sebagai service. Selain itu, tersedia fitur **Server Monitoring** untuk memantau CPU, RAM, uptime, dan status server sebagai bagian dari administrasi serta pemeliharaan server.
 
 
 # 📌 Daftar Isi
@@ -34,7 +35,9 @@ Pada sisi server, aplikasi dijalankan sebagai service menggunakan **systemd**, s
 
 # 🎯 Tentang Project
 
-Dimsum Delight merupakan aplikasi web yang dibuat untuk membantu proses pengelolaan bisnis dimsum secara terintegrasi.
+Dimsum Delight merupakan aplikasi web yang digunakan sebagai media penerapan **arsitektur jaringan client-server**.
+
+Aplikasi ditempatkan pada server Debian 13 dan dapat diakses oleh client menggunakan **alamat IP server melalui jaringan lokal**. Server bertugas menyediakan layanan aplikasi, memproses request dari client, mengelola database, serta melakukan monitoring terhadap kondisi sistem.
 
 Sistem memiliki dua sisi utama:
 
@@ -42,12 +45,13 @@ Sistem memiliki dua sisi utama:
 
 Customer dapat:
 
+* Mengakses website melalui jaringan.
 * Melihat daftar produk.
 * Melihat harga produk.
 * Melihat stok.
 * Melakukan pemesanan.
 * Mengisi informasi pelanggan.
-* Mengirim pesanan ke sistem.
+* Mengirim pesanan ke server.
 
 ### 🏪 Seller / Administrator
 
@@ -59,27 +63,30 @@ Seller memiliki dashboard untuk:
 * Memantau aktivitas sistem.
 * Melihat kondisi server.
 * Memantau penggunaan resource server.
+* Membantu pengecekan ketika terjadi masalah pada layanan.
 
-Dengan demikian, aplikasi tidak hanya digunakan sebagai website pemesanan, tetapi juga menjadi media penerapan **administrasi Web Server dan dasar DevOps**.
+Dengan demikian, project ini tidak hanya menunjukkan pembuatan aplikasi, tetapi juga penerapan **client-server, administrasi Web Server, pengelolaan server Linux, monitoring, dan troubleshooting** yang berkaitan dengan bidang TJKT.
 
 ---
 
 # 🎯 Tujuan Project
 
-Project ini dibuat untuk menerapkan konsep yang dipelajari pada bidang **Teknik Jaringan Komputer dan Telekomunikasi (TJKT)**, khususnya dalam pengelolaan Web Server.
+Project ini dibuat untuk menerapkan konsep yang dipelajari pada bidang **Teknik Jaringan Komputer dan Telekomunikasi (TJKT)**, khususnya dalam pengelolaan **server dan layanan jaringan**.
 
 Tujuan utama project:
 
-1. Membuat aplikasi web yang dapat berjalan pada server Linux.
-2. Menghubungkan aplikasi dengan database MariaDB.
-3. Melakukan deployment aplikasi Node.js.
-4. Mengelola aplikasi menggunakan systemd.
-5. Menyediakan REST API untuk komunikasi antara frontend dan backend.
-6. Menerapkan monitoring resource server.
-7. Menyediakan indikator kondisi CPU dan RAM.
-8. Mencatat aktivitas sistem menggunakan activity log.
-9. Menyediakan informasi server untuk membantu troubleshooting.
-10. Memberikan antisipasi ketika resource server mengalami penggunaan tinggi.
+1. Membuat aplikasi yang dapat berjalan pada server Linux.
+2. Menempatkan aplikasi pada server Debian 13.
+3. Mengatur aplikasi agar dapat diakses melalui jaringan lokal.
+4. Menghubungkan client dengan server menggunakan alamat IP dan port.
+5. Menghubungkan aplikasi dengan database MariaDB.
+6. Melakukan deployment aplikasi Node.js.
+7. Mengelola aplikasi menggunakan systemd.
+8. Menerapkan monitoring resource server.
+9. Menyediakan indikator kondisi CPU dan RAM.
+10. Mencatat aktivitas sistem menggunakan activity log.
+11. Menyediakan informasi kondisi server untuk membantu troubleshooting.
+12. Memberikan antisipasi ketika resource server mengalami penggunaan tinggi.
 
 ---
 
@@ -88,14 +95,14 @@ Tujuan utama project:
 | Teknologi                   | Fungsi                                               |
 | --------------------------- | ---------------------------------------------------- |
 | **Debian 13**               | Operating System server                              |
-| **Node.js**                 | Runtime untuk menjalankan backend                    |
+| **Node.js**                 | Runtime untuk menjalankan aplikasi pada server       |
 | **Express.js**              | Framework backend dan HTTP server                    |
-| **MariaDB**                 | Database aplikasi                                    |
+| **MariaDB**                 | Database server aplikasi                             |
 | **MySQL2**                  | Driver koneksi Node.js ke MariaDB                    |
 | **HTML**                    | Struktur halaman web                                 |
 | **CSS**                     | Tampilan dan layout dashboard                        |
-| **JavaScript**              | Interaksi frontend dan komunikasi API                |
-| **REST API**                | Komunikasi frontend dengan backend                   |
+| **JavaScript**              | Interaksi frontend dan komunikasi client-server      |
+| **REST API**                | Komunikasi data antara client dan server             |
 | **systemd**                 | Menjalankan dan mengelola aplikasi sebagai service   |
 | **Linux OS Monitoring API** | Mengambil informasi CPU, RAM, uptime, dan sistem     |
 | **VirtualBox**              | Menjalankan environment server Debian secara virtual |
@@ -113,6 +120,8 @@ Server bertanggung jawab terhadap:
 ```text
 Client
    ↓
+Jaringan Lokal
+   ↓
 Debian Server
    ↓
 Node.js
@@ -120,7 +129,7 @@ Node.js
 Express.js
    ↓
 MariaDB
-```
+````
 
 Debian juga digunakan untuk menjalankan:
 
@@ -130,11 +139,13 @@ Debian juga digunakan untuk menjalankan:
 * Activity Logging
 * Server Monitoring
 
+Dalam project ini, Debian berperan sebagai pusat layanan yang menerima request dari client melalui jaringan.
+
 ---
 
 ## 2. Node.js
 
-Node.js digunakan sebagai runtime untuk menjalankan backend aplikasi.
+Node.js digunakan sebagai runtime untuk menjalankan aplikasi pada server.
 
 Node.js menjalankan file utama:
 
@@ -150,20 +161,22 @@ Node.js v22.23.2
 
 Node.js menangani:
 
-* HTTP request
-* API
-* komunikasi database
-* business logic
-* server monitoring
-* activity logging
+* Request dari client.
+* Komunikasi antara client dan server.
+* Pengolahan data aplikasi.
+* Komunikasi database.
+* Server monitoring.
+* Activity logging.
+
+Node.js menjadi bagian utama dari layanan aplikasi yang berjalan pada server Debian.
 
 ---
 
 ## 3. Express.js
 
-Express.js digunakan sebagai framework backend.
+Express.js digunakan sebagai framework backend sekaligus HTTP server.
 
-Contoh alur request:
+Alur komunikasi:
 
 ```text
 Browser
@@ -172,31 +185,24 @@ HTTP Request
    ↓
 Express.js
    ↓
-Route
-   ↓
-Logic
+Proses Request
    ↓
 MariaDB
    ↓
-JSON Response
+HTTP Response
    ↓
 Browser
 ```
 
-Express juga digunakan untuk menyediakan endpoint seperti:
+Express digunakan untuk menangani request dari client dan memberikan response melalui jaringan.
 
-```text
-/api/menu
-/api/products
-/api/server/health
-/api/business/monitoring
-```
+Dengan konsep tersebut, client tidak mengakses database secara langsung. Seluruh proses data dilakukan melalui server.
 
 ---
 
 ## 4. MariaDB
 
-MariaDB digunakan sebagai database utama.
+MariaDB digunakan sebagai database server utama.
 
 Database:
 
@@ -225,7 +231,7 @@ order_items
 orders
 ```
 
-Dengan struktur tersebut, satu pesanan dapat memiliki beberapa produk.
+MariaDB berada pada sisi server dan digunakan oleh aplikasi server untuk mengelola data.
 
 ---
 
@@ -251,13 +257,13 @@ MariaDB
 dimsum_delight
 ```
 
-Connection pool digunakan agar aplikasi dapat mengelola koneksi database secara lebih efisien.
+Connection pool digunakan agar server dapat mengelola koneksi database dengan lebih efisien.
 
 ---
 
 # 🖥️ Arsitektur Sistem
 
-Secara keseluruhan, arsitektur Dimsum Delight:
+Secara keseluruhan, arsitektur Dimsum Delight menggunakan konsep **client-server**:
 
 ```text
                  CLIENT
@@ -267,6 +273,9 @@ Secara keseluruhan, arsitektur Dimsum Delight:
                    │
                    │ HTTP
                    ▼
+             Jaringan Lokal
+                   │
+                   ▼
         ┌─────────────────────┐
         │    Debian 13 Server │
         │                     │
@@ -274,7 +283,7 @@ Secara keseluruhan, arsitektur Dimsum Delight:
         │       │             │
         │   Express.js        │
         │       │             │
-        │       ├──── REST API
+        │       ├──── Komunikasi Client
         │       │
         │       ├──── Monitoring
         │       │
@@ -291,62 +300,93 @@ Secara keseluruhan, arsitektur Dimsum Delight:
           dimsum_delight
 ```
 
+Client mengakses server melalui jaringan menggunakan alamat IP server dan port aplikasi.
+
+Server kemudian menerima request, memproses data, berkomunikasi dengan database, dan mengirimkan response kembali kepada client.
+
 ---
 
 # ⚙️ Cara Kerja Sistem
 
 ## 1. Customer membuka website
 
-Browser mengakses:
+Browser client mengakses:
 
 ```text
 http://IP-SERVER:3000
 ```
 
-Request diterima oleh Node.js dan Express.js.
+Request dikirim melalui jaringan menuju server Debian 13.
+
+Server menerima request pada port aplikasi yang digunakan.
 
 ---
 
 ## 2. Express memproses request
 
-Express menentukan endpoint yang diminta.
+Express.js memproses request yang diterima dari client.
 
-Contoh:
+Alurnya:
 
 ```text
-GET /api/menu
+Client
+   ↓
+HTTP Request
+   ↓
+Debian Server
+   ↓
+Express.js
+   ↓
+Proses Request
 ```
 
-Kemudian backend mengambil data produk dari MariaDB.
+Server kemudian menentukan proses atau data yang diperlukan oleh client.
 
 ---
 
 ## 3. Database mengirimkan data
 
-MariaDB mengembalikan data produk.
+Jika request membutuhkan data, server melakukan komunikasi dengan MariaDB.
 
-Node.js kemudian mengubah data menjadi response JSON.
+Alurnya:
 
-Contoh:
-
-```json
-{
-  "success": true,
-  "products": []
-}
+```text
+Express.js
+   ↓
+MySQL2
+   ↓
+MariaDB
+   ↓
+Database
+   ↓
+Data
 ```
+
+Data kemudian diproses oleh server sebelum dikirimkan kembali kepada client.
 
 ---
 
 ## 4. Frontend menampilkan data
 
-JavaScript frontend mengambil API menggunakan:
+Setelah server memberikan response, JavaScript pada browser memproses data tersebut.
 
-```javascript
-fetch('/api/menu')
+Alurnya:
+
+```text
+Server
+   ↓
+HTTP Response
+   ↓
+Jaringan
+   ↓
+Browser Client
+   ↓
+JavaScript
+   ↓
+Tampilan Website
 ```
 
-Data kemudian ditampilkan pada halaman website.
+Dengan demikian, komunikasi antara client dan server berlangsung melalui jaringan.
 
 ---
 
@@ -354,12 +394,13 @@ Data kemudian ditampilkan pada halaman website.
 
 ## Customer
 
+* Mengakses website melalui jaringan.
 * Daftar produk.
 * Harga produk.
 * Stok produk.
 * Pemesanan.
 * Informasi pelanggan.
-* Pengiriman data pesanan.
+* Pengiriman data pesanan ke server.
 
 ## Seller Dashboard
 
@@ -375,11 +416,13 @@ Server Monitoring
 Settings
 ```
 
+Dashboard juga digunakan sebagai media untuk melihat kondisi aplikasi dan server.
+
 ---
 
 # 📊 Business Monitoring
 
-Business Monitoring digunakan untuk melihat kondisi operasional bisnis.
+Business Monitoring digunakan untuk melihat kondisi operasional bisnis berdasarkan data yang diproses oleh server.
 
 Informasi yang dapat ditampilkan:
 
@@ -390,27 +433,29 @@ Informasi yang dapat ditampilkan:
 * Status pesanan.
 * Produk yang terjual.
 
-Data diperoleh dari database MariaDB melalui API.
-
 Alurnya:
 
 ```text
+Client
+   ↓
+Server
+   ↓
 MariaDB
    ↓
-Query
+Data
    ↓
-Express API
+Server
    ↓
-JavaScript
-   ↓
-Business Monitoring
+Client Dashboard
 ```
+
+Data diproses pada sisi server sebelum ditampilkan kepada client.
 
 ---
 
 # 📦 Product Management
 
-Fitur Product Management digunakan untuk mengelola produk.
+Fitur Product Management digunakan untuk mengelola data produk pada server.
 
 Informasi produk meliputi:
 
@@ -428,11 +473,13 @@ Data produk disimpan pada tabel:
 products
 ```
 
+Pengelolaan dilakukan melalui aplikasi yang berjalan pada server, sedangkan browser berfungsi sebagai client.
+
 ---
 
 # 📋 Order Management
 
-Order Management digunakan untuk mengelola pesanan customer.
+Order Management digunakan untuk mengelola pesanan customer yang dikirim melalui jaringan ke server.
 
 Status pesanan:
 
@@ -454,7 +501,21 @@ processed_at
 completed_at
 ```
 
-Hal ini membuat proses pengelolaan pesanan menjadi lebih terstruktur.
+Alur sederhananya:
+
+```text
+Customer
+   ↓
+Jaringan
+   ↓
+Server
+   ↓
+Database
+   ↓
+Seller Dashboard
+```
+
+Hal tersebut menunjukkan proses pertukaran data antara client, server, dan database.
 
 ---
 
@@ -462,9 +523,9 @@ Hal ini membuat proses pengelolaan pesanan menjadi lebih terstruktur.
 
 Salah satu bagian utama project adalah **Server Monitoring**.
 
-Fitur ini dibuat menggunakan Node.js os module untuk mengambil data langsung dari server Debian.
+Fitur ini digunakan untuk melihat kondisi server Debian secara langsung melalui dashboard.
 
-Data tersebut diproses melalui Express API /api/server/health lalu ditampilkan di dashboard Server Monitoring. sebagai bentuk antisipasi apabila resource server mengalami penggunaan yang tinggi.
+Data monitoring diambil menggunakan Node.js `os` module dan diproses oleh server sebelum ditampilkan pada dashboard.
 
 Monitoring mencakup:
 
@@ -477,35 +538,31 @@ Monitoring mencakup:
 * Threshold CPU.
 * Threshold RAM.
 
+Fitur ini digunakan sebagai bagian dari **administrasi server dan antisipasi gangguan akibat penggunaan resource yang terlalu tinggi**.
+
 ---
 
 # 📈 Cara Kerja Monitoring
 
-Server menyediakan endpoint:
-
-```text
-/api/server/health
-```
-
-Frontend meminta data tersebut secara berkala.
+Server mengambil informasi kondisi sistem kemudian mengirimkan hasil monitoring kepada client.
 
 Alurnya:
 
 ```text
-Server
+Debian Server
    ↓
 Node.js OS Monitoring
    ↓
 CPU / RAM / Uptime
    ↓
-Health API
+Server Processing
    ↓
-JavaScript Frontend
+Client Browser
    ↓
 Server Monitoring Dashboard
 ```
 
-Contoh response:
+Contoh informasi yang ditampilkan:
 
 ```json
 {
@@ -521,11 +578,13 @@ Contoh response:
 }
 ```
 
+Data tersebut membantu administrator melihat kondisi server tanpa harus selalu melakukan pengecekan melalui terminal.
+
 ---
 
 # 🚨 Resource Threshold
 
-Monitoring menggunakan threshold untuk membedakan kondisi resource.
+Monitoring menggunakan threshold untuk membedakan kondisi resource server.
 
 ### CPU
 
@@ -574,13 +633,13 @@ cpu: {
 }
 ```
 
-Dengan cara tersebut, nilai threshold tidak perlu ditulis berulang kali pada backend.
+Dengan cara tersebut, penggunaan resource server dapat dikategorikan sehingga administrator lebih mudah mengetahui kondisi server.
 
 ---
 
 # 🧠 Monitoring Status Logic
 
-Status resource diproses melalui:
+Status resource server diproses melalui:
 
 ```text
 config/monitoringStatus.js
@@ -617,13 +676,15 @@ Response monitoring juga memberikan informasi status:
 }
 ```
 
+Status tersebut membantu administrator melakukan pengecekan kondisi server berdasarkan penggunaan resource.
+
 ---
 
 # 🔔 Konsep Alert
 
-Project ini menggunakan konsep **local server alert**, bukan Telegram.
+Project ini menggunakan konsep **local server alert**.
 
-Tujuannya adalah memberikan informasi ketika terjadi kondisi yang perlu diperhatikan.
+Tujuannya adalah memberikan informasi ketika penggunaan resource server berada pada kondisi yang perlu diperhatikan.
 
 Contoh:
 
@@ -636,9 +697,9 @@ CPU Usage
 Resource usage is critically high.
 ```
 
-Dengan konsep tersebut administrator dapat mengetahui adanya lonjakan penggunaan resource dari dashboard.
+Dengan konsep tersebut administrator dapat mengetahui adanya lonjakan penggunaan resource melalui dashboard.
 
-> Alert pada project ini difokuskan sebagai mekanisme antisipasi dan monitoring internal server, tanpa integrasi layanan pesan eksternal seperti Telegram.
+> Alert pada project ini difokuskan sebagai mekanisme antisipasi dan monitoring internal server tanpa menggunakan layanan pesan eksternal.
 
 ---
 
@@ -669,7 +730,8 @@ Logging berguna untuk:
 * Monitoring aktivitas.
 * Troubleshooting.
 * Mengetahui aktivitas sistem.
-* Membantu proses pemeriksaan ketika terjadi masalah.
+* Membantu pemeriksaan ketika terjadi masalah pada layanan.
+* Membantu administrator melakukan pengecekan aktivitas server.
 
 ---
 
@@ -688,6 +750,8 @@ products
 orders
 order_items
 ```
+
+Database berada pada sisi server dan digunakan untuk menyimpan data aplikasi.
 
 ### Products
 
@@ -735,26 +799,33 @@ subtotal
 
 # 🔌 REST API
 
-Backend menyediakan API untuk menghubungkan frontend dengan server.
+Backend menyediakan mekanisme komunikasi data antara **client dan server**.
 
-Contoh endpoint:
+API digunakan agar client dapat meminta atau mengirim data melalui layanan yang berjalan pada server tanpa mengakses database secara langsung.
 
-| Endpoint                   | Fungsi                          |
-| -------------------------- | ------------------------------- |
-| `/api/menu`                | Mengambil data menu             |
-| `/api/products`            | Mengelola/mengambil data produk |
-| `/api/business/monitoring` | Data monitoring bisnis          |
-| `/api/server/health`       | Data kondisi server             |
-
-API server health merupakan salah satu bagian penting pada monitoring.
-
-Endpoint:
+Alur komunikasi:
 
 ```text
-GET /api/server/health
+Client
+   ↓
+HTTP Request
+   ↓
+Debian Server
+   ↓
+Node.js / Express.js
+   ↓
+MariaDB
+   ↓
+Node.js / Express.js
+   ↓
+HTTP Response
+   ↓
+Client
 ```
 
-Digunakan untuk mendapatkan:
+Pada project ini, komunikasi server juga digunakan untuk memberikan informasi mengenai kondisi server kepada dashboard.
+
+Informasi yang dapat digunakan untuk monitoring meliputi:
 
 ```text
 Hostname
@@ -771,17 +842,13 @@ Server Status
 Threshold
 ```
 
+Dengan konsep tersebut, client dapat memperoleh data dari server melalui layanan aplikasi tanpa berhubungan langsung dengan database.
+
 ---
 
 # ⚙️ Deployment dan Service Management
 
-Aplikasi tidak hanya dijalankan menggunakan:
-
-```bash
-node server.js
-```
-
-Tetapi juga dikonfigurasi sebagai **systemd service**.
+Aplikasi ditempatkan pada server Debian dan dikonfigurasi sebagai **systemd service**.
 
 Nama service:
 
@@ -794,6 +861,8 @@ Alur deployment:
 ```text
 Source Code
     ↓
+Debian Server
+    ↓
 Node.js
     ↓
 server.js
@@ -803,13 +872,17 @@ systemd
 dimsum.service
     ↓
 Application Running
+    ↓
+Client Access
 ```
+
+Deployment dilakukan agar aplikasi dapat berjalan sebagai layanan pada server dan dapat diakses oleh client melalui jaringan.
 
 ---
 
 # 🔄 systemd
 
-systemd digunakan agar aplikasi dapat dikelola sebagai service server.
+systemd digunakan agar aplikasi dapat dikelola sebagai service pada server Linux.
 
 ### Menjalankan aplikasi
 
@@ -841,7 +914,7 @@ systemctl stop dimsum
 systemctl enable dimsum
 ```
 
-Dengan systemd, aplikasi dapat berjalan lebih terstruktur dibandingkan menjalankan Node.js secara manual setiap kali server dinyalakan.
+Dengan systemd, aplikasi dapat dikelola secara lebih terstruktur sebagai layanan pada server Linux.
 
 ---
 
@@ -849,14 +922,15 @@ Dengan systemd, aplikasi dapat berjalan lebih terstruktur dibandingkan menjalank
 
 Beberapa penerapan yang digunakan:
 
-* Database tidak diakses langsung oleh frontend.
-* Frontend berkomunikasi melalui API.
-* Database berada pada server.
+* Database tidak diakses langsung oleh client.
+* Client berkomunikasi dengan server melalui layanan aplikasi.
+* Database berada pada sisi server.
 * Aplikasi dijalankan sebagai service.
 * Activity log digunakan untuk pemeriksaan aktivitas.
 * CPU dan RAM dipantau.
 * Threshold digunakan untuk mendeteksi kondisi resource tinggi.
 * Konfigurasi monitoring dipisahkan dari konfigurasi database.
+* Aplikasi dapat diakses melalui alamat IP dan port server.
 
 Struktur konfigurasi:
 
@@ -930,7 +1004,7 @@ Project2/
 
 ![Settings](./Screenshot/Screenshot%202026-08-28%20115613.png)
 
-> Screenshot digunakan sebagai dokumentasi tampilan aplikasi yang dijalankan pada Web Server Debian.
+> Screenshot digunakan sebagai dokumentasi tampilan aplikasi yang dijalankan pada Web Server Debian dan diakses melalui jaringan.
 
 ---
 
@@ -979,6 +1053,12 @@ Server akan berjalan pada:
 http://localhost:3000
 ```
 
+Untuk akses melalui jaringan:
+
+```text
+http://IP-SERVER:3000
+```
+
 ## 5. Jalankan Menggunakan systemd
 
 ```bash
@@ -1007,7 +1087,9 @@ http://IP-SERVER:3000/seller
 
 # 🧪 Pengujian Server
 
-Health API dapat diuji menggunakan:
+Pengujian dilakukan untuk memastikan layanan pada server berjalan dengan baik.
+
+Health service dapat diuji menggunakan:
 
 ```bash
 curl -s http://localhost:3000/api/server/health
@@ -1036,6 +1118,14 @@ Status service dapat diperiksa dengan:
 ```bash
 systemctl status dimsum --no-pager
 ```
+
+Pengecekan port:
+
+```bash
+ss -tulpn | grep 3000
+```
+
+Pengujian tersebut digunakan untuk memastikan service berjalan dan port aplikasi tersedia pada server.
 
 ---
 
@@ -1081,7 +1171,7 @@ systemctl status dimsum
 systemctl restart dimsum
 ```
 
-### Cek API
+### Cek layanan dari server
 
 ```bash
 curl -s http://localhost:3000/api/server/health
@@ -1113,6 +1203,8 @@ Jika terjadi masalah database, periksa status MariaDB:
 systemctl status mariadb
 ```
 
+Pengecekan tersebut membantu menentukan apakah masalah berasal dari **service aplikasi, port, database, atau layanan server**.
+
 ---
 
 # 📌 Alur Keseluruhan Project
@@ -1124,6 +1216,9 @@ Secara sederhana, keseluruhan sistem bekerja seperti berikut:
                    │
                    ▼
              Web Browser
+                   │
+                   ▼
+             Jaringan Lokal
                    │
                    ▼
           ┌────────────────┐
@@ -1150,17 +1245,25 @@ Secara sederhana, keseluruhan sistem bekerja seperti berikut:
                   │
                   ▼
           dimsum_delight
-                  
+
+Network:
+Client ────────────┐
+                   │
+IP Server ─────────┤
+Port 3000 ─────────┤
+                   ▼
+              Web Server
+                   │
+                   ▼
+             Client Access
+
 Monitoring:
 CPU ────────────┐
 RAM ────────────┤
 Uptime ─────────┤
 Service ────────┤
                 ▼
-          Health API
-                │
-                ▼
-       Server Monitoring
+          Server Monitoring
                 │
                 ▼
        NORMAL / WARNING /
@@ -1171,7 +1274,7 @@ Service ────────┤
 
 # 🧩 Konsep DevOps yang Diterapkan
 
-Walaupun project ini tidak menggunakan tools monitoring berat seperti Prometheus atau Grafana, beberapa konsep dasar DevOps tetap diterapkan.
+Walaupun project ini tidak menggunakan tools monitoring berat seperti Prometheus atau Grafana, beberapa konsep pengelolaan server dan layanan tetap diterapkan.
 
 ### Development
 
@@ -1190,11 +1293,22 @@ MariaDB
 MySQL2
 ```
 
+### Server & Network
+
+```text
+Debian 13
+Client-Server
+Jaringan Lokal
+IP Server
+Port 3000
+```
+
 ### Deployment
 
 ```text
 Debian 13
 systemd
+dimsum.service
 ```
 
 ### Monitoring
@@ -1204,7 +1318,7 @@ CPU
 RAM
 Uptime
 Service Status
-Health API
+Server Health
 Threshold
 ```
 
@@ -1222,6 +1336,8 @@ Develop
    ↓
 Deploy
    ↓
+Connect
+   ↓
 Run
    ↓
 Monitor
@@ -1237,20 +1353,24 @@ Troubleshoot
 
 # 🎓 Relevansi dengan TJKT
 
-Project ini memiliki keterkaitan dengan pembelajaran TJKT karena mencakup beberapa aspek administrasi server, seperti:
+Project ini memiliki keterkaitan dengan pembelajaran TJKT karena mencakup beberapa aspek jaringan dan administrasi sistem, seperti:
 
+* Penerapan konsep client-server.
+* Penggunaan jaringan lokal.
+* Penggunaan alamat IP server.
+* Penggunaan port layanan.
 * Linux server administration.
 * Konfigurasi Web Server.
-* Deployment aplikasi.
+* Deployment aplikasi pada server.
 * Pengelolaan service Linux.
 * Konfigurasi database server.
-* Penggunaan jaringan lokal.
+* Komunikasi data antara client dan server.
 * Monitoring resource server.
 * Troubleshooting service.
 * Pengelolaan log.
-* Pengujian konektivitas dan API.
+* Pengujian konektivitas layanan.
 
-Dengan demikian, project tidak hanya menunjukkan kemampuan membuat aplikasi web, tetapi juga bagaimana aplikasi tersebut **dijalankan, dikelola, dipantau, dan diantisipasi ketika berjalan pada sebuah server**.
+Dengan demikian, project tidak hanya menunjukkan kemampuan membuat aplikasi, tetapi juga bagaimana sebuah **server menyediakan layanan kepada client melalui jaringan, dikelola, dipantau, dan dilakukan troubleshooting** ketika terjadi masalah.
 
 ---
 
@@ -1278,35 +1398,38 @@ Dengan demikian, project tidak hanya menunjukkan kemampuan membuat aplikasi web,
 
 # 📝 Kesimpulan
 
-Dimsum Delight Web Server merupakan project yang menggabungkan **aplikasi web, database, Web Server, dan monitoring server** dalam satu sistem.
+Dimsum Delight Web Server merupakan project yang menggabungkan **jaringan client-server, Web Server, server Linux, database, deployment, service management, dan monitoring server** dalam satu sistem.
 
-Aplikasi dibangun menggunakan Node.js dan Express.js, kemudian terhubung dengan MariaDB sebagai database. Aplikasi dijalankan pada Debian 13 dan dikelola menggunakan systemd sehingga dapat berjalan sebagai service server.
+Aplikasi dijalankan pada Debian 13 sebagai server dan dapat diakses oleh client melalui **alamat IP dan port pada jaringan lokal**. Node.js dan Express.js digunakan untuk menyediakan layanan aplikasi, sedangkan MariaDB digunakan sebagai database pada sisi server.
 
-Selain fungsi utama seperti pengelolaan produk dan pesanan, project juga menerapkan **Business Monitoring, Activity Logging, Server Health API, CPU Monitoring, RAM Monitoring, uptime monitoring, dan resource threshold**.
+Pengelolaan aplikasi dilakukan menggunakan systemd sehingga aplikasi dapat dijalankan dan dikontrol sebagai service pada server Linux.
+
+Selain fungsi utama seperti pengelolaan produk dan pesanan, project juga menerapkan **komunikasi client-server, Activity Logging, Server Monitoring, CPU Monitoring, RAM Monitoring, uptime monitoring, resource threshold, dan troubleshooting service**.
 
 Penerapan monitoring tersebut bertujuan sebagai **langkah antisipasi**, sehingga administrator dapat mengetahui kondisi server dan mengenali penggunaan resource yang tinggi sebelum berkembang menjadi masalah yang lebih serius.
 
-Project ini menunjukkan bahwa sebuah aplikasi Web Server tidak hanya perlu dibuat agar dapat berjalan, tetapi juga perlu **dikelola, dipantau, dan dipelihara** agar tetap dapat digunakan dengan baik.
+Project ini menunjukkan bahwa sebuah sistem jaringan tidak hanya membutuhkan layanan yang dapat berjalan, tetapi juga membutuhkan **server yang dapat dikonfigurasi, dikelola, dipantau, dan dilakukan troubleshooting** agar layanan tetap dapat digunakan oleh client dengan baik.
 
 ---
 
 # 🌐 Portofolio Lengkap
 
-Dokumentasi lengkap mengenai project, proses pengembangan, implementasi Web Server, monitoring server, serta hasil project dapat dilihat pada:
+Dokumentasi lengkap mengenai project, proses pengembangan, implementasi jaringan client-server, Web Server, administrasi server, monitoring server, serta hasil project dapat dilihat pada:
 
 **Edusoft Portfolio**
 
 [Noviana Putri Yuliani](https://portfolio.edusoftcenter.com/contributors/noviana-putri-yuliani)
-
 
 ---
 
 ## 👩‍💻 Project Information
 
 **Project:** Dimsum Delight Web Server
-**Bidang:** Web Server & Server Monitoring
+**Bidang:** Network & System / Web Server
 **Jurusan:** TJKT
 **Server OS:** Debian 13
+**Arsitektur:** Client-Server
+**Jaringan:** Jaringan Lokal
 **Backend:** Node.js + Express.js
 **Database:** MariaDB
 **Service Management:** systemd
@@ -1315,4 +1438,5 @@ Dokumentasi lengkap mengenai project, proses pengembangan, implementasi Web Serv
 
 ---
 
-Dengan struktur seperti ini, README-mu sudah jauh lebih menunjukkan bahwa **Dimsum Delight adalah project Web Server/TJKT yang punya sisi deployment, administrasi, monitoring, logging, dan antisipasi resource**, bukan sekadar website penjualan.
+```
+```
