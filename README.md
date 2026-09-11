@@ -978,7 +978,7 @@ Dengan demikian, aplikasi Dimsum Delight pada project ini bukan menjadi satu-sat
 
 Portfolio:
 
-https://portfolio.edusoftcenter.com/contributors/noviana-putri-yuliani
+[Noviana Putri Yuliani](https://portfolio.edusoftcenter.com/contributors/noviana-putri-yuliani)
 
 Repository GitHub:
 
